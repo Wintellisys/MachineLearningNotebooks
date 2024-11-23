@@ -674,7 +674,12 @@ public class MalmoEnvServer implements IWantToQuit {
             int role = Integer.parseInt(tokenSplits[1]);
             int reset = Integer.parseInt(tokenSplits[2]);
 
-            String previousToken = experimentId + ":" + role + ":" + (reset - 1);
+            String previousToken;
+            if (reset > 0) {
+                previousToken = experimentId + ":" + role + ":" + (reset - 1);
+            } else {
+                previousToken = experimentId + ":" + role + ":0";
+            }
             initTokens.remove(previousToken);
             cond.signalAll();
 
